@@ -245,7 +245,7 @@ String[] ConfigNames = {
   
   "RSSI Min",
   "RSSI Max",
-  "RSSI Alarm",
+  "RSSI Alarm %",
   "Display RSSI",
   "RSSI Over MW",
   "PWM RSSI",
@@ -305,7 +305,7 @@ String[] ConfigHelp = {
   
   "RSSI Min:",
   "RSSI Max:",
-  "RSSI Alarm",
+  "RSSI Alarm %",
   "Display RSSI:",
   "RSSI Over MW",
   "PWM RSSI",
