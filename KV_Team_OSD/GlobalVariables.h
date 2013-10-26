@@ -125,7 +125,7 @@ uint8_t EEPROM_DEFAULT[EEPROM_SETTINGS] = {
 
 0,   // S_VIDVOLTAGE                14
 100, // S_VIDDIVIDERRATIO           15
-0,   // S_VIDVOLTAGE_VBAT           16 
+0,   // S_VIDVOLTAGE_VBAT           16
 
 0,   // S_DISPLAYTEMPERATURE        17
 255, // S_TEMPERATUREMAX            18
@@ -136,7 +136,7 @@ uint8_t EEPROM_DEFAULT[EEPROM_SETTINGS] = {
 0,   // S_COORDINATES               21
 0,   // S_GPSCOORDTOP               22
 1,   // S_GPSALTITUDE               23
-1,   // S_ANGLETOHOME               24 
+1,   // S_ANGLETOHOME               24
 1,   // S_SHOWHEADING               25
 1,   // S_HEADING360                26
 
@@ -243,7 +243,7 @@ int8_t temperMAX=0;
 int16_t altitudeMAX=0;
 int16_t distanceMAX=0;
 float trip=0;
-uint16_t flyingTime=0; 
+uint16_t flyingTime=0;
 
 
 // ---------------------------------------------------------------------------------------
@@ -266,7 +266,7 @@ uint16_t flyingTime=0;
 #define MSP_PID                  112   //out message         P I D coeff (9 are used currently)
 #define MSP_BOX                  113   //out message         BOX setup (number is dependant of your setup)
 #define MSP_MISC                 114   //out message         powermeter trig
-#define MSP_MOTOR_PINS           115   //out message         which pins are in use for motors & servos, for GUI 
+#define MSP_MOTOR_PINS           115   //out message         which pins are in use for motors & servos, for GUI
 #define MSP_BOXNAMES             116   //out message         the aux switch names
 #define MSP_PIDNAMES             117   //out message         the PID names
 #define MSP_WP                   118   //out message         get a WP, WP# is in the payload, returns (WP#, lat, lon, alt, flags) WP#0-home, WP#16-poshold
@@ -317,7 +317,7 @@ const char message5[] PROGMEM = "MW VERSION:";
 const char message6[] PROGMEM = "MENU:THRT MIDDLE";
 const char message7[] PROGMEM = "YAW RIGHT";
 const char message8[] PROGMEM = "PITCH FULL";
-const char message9[] PROGMEM = "UNIQUE ID:";         // Call Sign on the beggining of the transmission   
+const char message9[] PROGMEM = "UNIQUE ID:";         // Call Sign on the beggining of the transmission
 
 // For Config menu common
 const char configMsgON[] PROGMEM = "ON";

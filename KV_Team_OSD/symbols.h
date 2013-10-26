@@ -1,6 +1,6 @@
 /*
  *  symbols.h
- *  
+ *
  *
  *
  */
@@ -14,7 +14,7 @@
 // Degrees Icon for HEADING/DIRECTION HOME
 #define SYM_DEGREES 0XBD
 
-// Direction arrows 
+// Direction arrows
 #define SYM_ARROW_SOUTH 0X60
 #define SYM_ARROW_2 0X61
 #define SYM_ARROW_3 0X62
@@ -33,7 +33,7 @@
 #define SYM_ARROW_16 0X6F
 
 // Heading Graphics
-#define SYM_HEADING_N 0X18 
+#define SYM_HEADING_N 0X18
 #define SYM_HEADING_S 0X19
 #define SYM_HEADING_E 0X1A
 #define SYM_HEADING_W 0X1B
@@ -46,7 +46,7 @@
 #define SYM_ALT 0XCC
 
 // GPS Mode and Autopilot
-#define SYM_3DFIX 0XDF 
+#define SYM_3DFIX 0XDF
 #define SYM_HOLD 0XEF
 #define SYM_G_HOME 0XFF
 
@@ -66,7 +66,7 @@
 #define SYM_AH_DECORATION_LEFT 0XC7
 
 // AH Steps
-//#define SYM_AH_STEP_7 0X10 
+//#define SYM_AH_STEP_7 0X10
 //#define SYM_AH_STEP_6 0X11
 //#define SYM_AH_STEP_5 0X12
 //#define SYM_AH_STEP_4 0X13
@@ -85,7 +85,7 @@
 #define SYM_POS_CLIMB1 0XB1
 #define SYM_POS_CLIMB2 0XB2
 #define SYM_POS_CLIMB3 0XB3
-#define SYM_NEG_CLIMB3 0XB4 
+#define SYM_NEG_CLIMB3 0XB4
 #define SYM_NEG_CLIMB2 0XB5
 #define SYM_NEG_CLIMB1 0XB6
 #define SYM_NEG_CLIMB 0XB7
@@ -120,7 +120,7 @@
 #define SYM_ALTFT 0XA8
 #define SYM_DISTHOME_FT 0XB9
 
-// Voltage and amperage 
+// Voltage and amperage
 #define SYM_VOLT 0XA9
 #define SYM_AMP 0X9A
 #define SYM_MAH 0XA4

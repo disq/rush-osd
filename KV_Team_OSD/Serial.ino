@@ -48,7 +48,7 @@ void serialMSPCheck()
 	txCheckSum ^= Settings[i];
       }
       Serial.write(txCheckSum);
-      
+
     }
 
     if (cmd == OSD_WRITE_CMD) {
@@ -73,7 +73,7 @@ void serialMSPCheck()
       else if(dataSize == 56) {
         for(uint8_t i = 0; i < 54; i++)
           fontData[i] = read8();
-      
+
 	uint8_t c = read8();
         write_NVM(c);
 	//fontCharacterReceived(c);
@@ -83,9 +83,9 @@ void serialMSPCheck()
     resetFunc();
     }
     if(cmd == OSD_SERIAL_SPEED) {
-    
+
     }
-                    
+
   }
 
   if (cmdMSP==MSP_IDENT)
@@ -175,7 +175,7 @@ void serialMSPCheck()
     modeMSPRequests &=~ REQ_MSP_PID;
   }
 
-if (Settings[S_USE_BOXNAMES]){ 
+if (Settings[S_USE_BOXNAMES]){
   if(cmdMSP==MSP_BOXNAMES) {
     uint32_t bit = 1;
     uint8_t remaining = dataSize;

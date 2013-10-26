@@ -113,7 +113,7 @@ void displayMode(void)
     screenBuffer[1] = (MwSensorPresent&BAROMETER) ? SYM_BAR : ' ';
     screenBuffer[2] = (MwSensorPresent&MAGNETOMETER) ? SYM_MAG : ' ';
     screenBuffer[3] = (MwSensorPresent&GPSSENSOR) ? SYM_GPS : ' ';
-  
+
     if(MwSensorActive&mode_stable)
     {
       screenBuffer[4]=SYM_STABLE;
@@ -133,10 +133,10 @@ void displayMode(void)
       screenBuffer[7]=SYM_3DFIX;
     else
       screenBuffer[7]=' ';
-  
+
     screenBuffer[8]=0;
     MAX7456_WriteString(screenBuffer,getPosition(sensorPosition));
-  
+
     // Put ON indicator under sensor symbol
     screenBuffer[0] = (MwSensorActive&mode_stable) ? SYM_CHECK : ' ';
     screenBuffer[1] = (MwSensorActive&mode_baro) ? SYM_CHECK : ' ';
@@ -161,9 +161,9 @@ void displayCallsign(void)
   if(Settings[S_DISPLAY_CS]){
       for(int X=0; X<10; X++) {
           screenBuffer[X] = char(Settings[S_CS0 + X]);
-     }   
+     }
        screenBuffer[10] = 0;
-       MAX7456_WriteString(screenBuffer, getPosition(callSignPosition)); 
+       MAX7456_WriteString(screenBuffer, getPosition(callSignPosition));
   }
 }
 void displayHorizon(int rollAngle, int pitchAngle)
@@ -287,7 +287,7 @@ void displayCurrentThrottle(void)
 }
 
 void displayTime(void)
-{ 
+{
   if(flyTime < 3600) {
     screenBuffer[0] = SYM_FLY_M;
     formatTime(flyTime, screenBuffer+1, 0);
@@ -344,7 +344,7 @@ void displayRSSI(void)
 
 void displayHeading(void)
 {
- if (Settings[S_SHOWHEADING]) {  
+ if (Settings[S_SHOWHEADING]) {
       int16_t heading = MwHeading;
       if (Settings[S_HEADING360]) {
         if(heading < 0)
@@ -359,7 +359,7 @@ void displayHeading(void)
         screenBuffer[5]=0;
       }
       MAX7456_WriteString(screenBuffer,getPosition(MwHeadingPosition));
-  }  
+  }
 }
 
 void displayHeadingGraph(void)
@@ -383,7 +383,7 @@ void displayIntro(void)
   else
     MAX7456_WriteString_P(message1, KVTeamVersionPosition+30);
 
-    
+
 
   MAX7456_WriteString_P(MultiWiiLogoL1Add, KVTeamVersionPosition+120);
   MAX7456_WriteString_P(MultiWiiLogoL2Add, KVTeamVersionPosition+120+LINE);
@@ -395,14 +395,14 @@ void displayIntro(void)
   MAX7456_WriteString_P(message6, KVTeamVersionPosition+120+LINE+LINE+LINE+LINE+LINE);
   MAX7456_WriteString_P(message7, KVTeamVersionPosition+125+LINE+LINE+LINE+LINE+LINE+LINE);
   MAX7456_WriteString_P(message8, KVTeamVersionPosition+125+LINE+LINE+LINE+LINE+LINE+LINE+LINE);
-  
+
   MAX7456_WriteString_P(message9, KVTeamVersionPosition+120+LINE+LINE+LINE+LINE+LINE+LINE+LINE+LINE);
    if(Settings[S_DISPLAY_CS]){
       for(int X=0; X<10; X++) {
           screenBuffer[X] = char(Settings[S_CS0 + X]);
       }
    if (Blink2hz)
-   MAX7456_WriteString(screenBuffer, KVTeamVersionPosition+130+LINE+LINE+LINE+LINE+LINE+LINE+LINE+LINE);;     // Call Sign on the beggining of the transmission (blink 2hz)  
+   MAX7456_WriteString(screenBuffer, KVTeamVersionPosition+130+LINE+LINE+LINE+LINE+LINE+LINE+LINE+LINE);;     // Call Sign on the beggining of the transmission (blink 2hz)
    }
 }
 
@@ -426,7 +426,7 @@ void displayGPSPosition(void)
       if(!Settings[S_GPSCOORDTOP])
         MAX7456_WriteString(screenBuffer,getPosition(MwGPSLatPosition));
       else
-        MAX7456_WriteString(screenBuffer,getPosition(MwGPSLatPositionTop));  
+        MAX7456_WriteString(screenBuffer,getPosition(MwGPSLatPositionTop));
     }
 
     if(fieldIsVisible(MwGPSLatPosition)) {
@@ -435,10 +435,10 @@ void displayGPSPosition(void)
       if(!Settings[S_GPSCOORDTOP])
         MAX7456_WriteString(screenBuffer,getPosition(MwGPSLonPosition));
       else
-        MAX7456_WriteString(screenBuffer,getPosition(MwGPSLonPositionTop));          
+        MAX7456_WriteString(screenBuffer,getPosition(MwGPSLonPositionTop));
     }
   }
-  
+
   if(Settings[S_GPSALTITUDE]){
       screenBuffer[0] = MwGPSAltPositionAdd[Settings[S_UNITSYSTEM]];
       uint16_t xx;
@@ -458,8 +458,8 @@ void displayNumberOfSat(void)
   itoa(GPS_numSat,screenBuffer+2,10);
   if(!Settings[S_GPSCOORDTOP])
     MAX7456_WriteString(screenBuffer,getPosition(GPS_numSatPosition));
-  else 
-    MAX7456_WriteString(screenBuffer,getPosition(GPS_numSatPositionTop)); 
+  else
+    MAX7456_WriteString(screenBuffer,getPosition(GPS_numSatPositionTop));
 }
 
 
@@ -477,7 +477,7 @@ void displayGPS_speed(void)
 
   if(xx > speedMAX)
     speedMAX = xx;
-    
+
   screenBuffer[0]=speedUnitAdd[Settings[S_UNITSYSTEM]];
   itoa(xx,screenBuffer+1,10);
   MAX7456_WriteString(screenBuffer,getPosition(speedPosition));
@@ -546,11 +546,11 @@ void displayAngleToHome(void)
 {
   if(!GPS_fix)
       return;
-      
+
   if(Settings[S_ANGLETOHOME]){
     if(GPS_distanceToHome <= 2 && Blink2hz)
       return;
-  
+
     ItoaPadded(GPS_directionToHome,screenBuffer,3,0);
     screenBuffer[3] = SYM_DEGREES;
     screenBuffer[4] = 0;
@@ -564,7 +564,7 @@ void displayDirectionToHome(void)
     return;
   if(GPS_distanceToHome <= 2 && Blink2hz)
     return;
-  
+
   int16_t d = MwHeading + 180 + 360 - GPS_directionToHome;
   d *= 4;
   d += 45;
@@ -604,7 +604,7 @@ void displayCursor(void)
       if (ROW==9) ROW=7;
       if (ROW==8) ROW=10;
       cursorpos=(ROW+2)*30+10+6+6;
-     
+
       }
     if(configPage==4){
       COL=3;
@@ -613,9 +613,9 @@ void displayCursor(void)
       if (ROW==6) ROW=10;
       cursorpos=(ROW+2)*30+10+6+6;
       }
-      
+
     if(configPage==5 || configPage==6)
-      {  
+      {
       COL=3;
       if (ROW==9) ROW=7;
       if (ROW==8) ROW=10;
@@ -623,11 +623,11 @@ void displayCursor(void)
       }
 
     if(configPage==7)
-      {  
+      {
       COL=3;
       if (ROW==9) ROW=5;
       if (ROW==6) ROW=10;
-      if (ROW==4) cursorpos=(ROW+2)*30+10+6+6-2;  // Metric/Imperial string longer            
+      if (ROW==4) cursorpos=(ROW+2)*30+10+6+6-2;  // Metric/Imperial string longer
       else cursorpos=(ROW+2)*30+10+6+6;
       }
 
@@ -711,7 +711,7 @@ void displayConfigScreen(void)
   if(configPage==3)
   {
     MAX7456_WriteString_P(configMsg30, 35);
-    
+
     MAX7456_WriteString_P(configMsg31, ROLLT);
     if(Settings[S_DISPLAYVOLTAGE]){
       MAX7456_WriteString_P(configMsgON, ROLLD);
@@ -719,10 +719,10 @@ void displayConfigScreen(void)
     else {
       MAX7456_WriteString_P(configMsgOFF, ROLLD);
     }
-    
+
     MAX7456_WriteString_P(configMsg32, PITCHT);
     MAX7456_WriteString(itoa(Settings[S_VOLTAGEMIN],screenBuffer,10),PITCHD);
-    
+
     MAX7456_WriteString_P(configMsg33, YAWT);
     if(Settings[S_VIDVOLTAGE]){
       MAX7456_WriteString_P(configMsgON, YAWD);
@@ -738,10 +738,10 @@ void displayConfigScreen(void)
     else {
       MAX7456_WriteString_P(configMsgOFF, ALTD);
     }
-    
+
     MAX7456_WriteString_P(configMsg35, VELT);
     MAX7456_WriteString(itoa(Settings[S_TEMPERATUREMAX],screenBuffer,10),VELD);
-    
+
     MAX7456_WriteString_P(configMsg36, LEVT);
     if(Settings[S_AMPER_HOUR]){
       MAX7456_WriteString_P(configMsgON, LEVD);
@@ -757,7 +757,7 @@ void displayConfigScreen(void)
     else{
       MAX7456_WriteString_P(configMsgOFF, MAGD);
     }
-    
+
   }
 
   if(configPage==4)
@@ -864,7 +864,7 @@ void displayConfigScreen(void)
     else{
       MAX7456_WriteString_P(configMsgOFF, VELD);
     }
-    
+
     MAX7456_WriteString_P(configMsg66, LEVT);
     if(Settings[S_SHOWHEADING]){
       MAX7456_WriteString_P(configMsgON, LEVD);
@@ -872,14 +872,14 @@ void displayConfigScreen(void)
     else{
       MAX7456_WriteString_P(configMsgOFF, LEVD);
     }
-    
+
     MAX7456_WriteString_P(configMsg67, MAGT);
     if(Settings[S_MODEICON]){
       MAX7456_WriteString_P(configMsgON, MAGD);
     }
     else{
       MAX7456_WriteString_P(configMsgOFF, MAGD);
-    }    
+    }
  }
 
   if(configPage==7)
@@ -901,15 +901,15 @@ void displayConfigScreen(void)
     else{
       MAX7456_WriteString_P(configMsgOFF, PITCHD);
     }
-    
+
     MAX7456_WriteString_P(configMsg73, YAWT);
     if(Settings[S_WITHDECORATION]){
       MAX7456_WriteString_P(configMsgON, YAWD);
     }
     else{
-      MAX7456_WriteString_P(configMsgOFF, YAWD);      
+      MAX7456_WriteString_P(configMsgOFF, YAWD);
     }
-    
+
     MAX7456_WriteString_P(configMsg74, ALTT);
     if(Settings[S_UNITSYSTEM]==METRIC){
       MAX7456_WriteString_P(configMsg75, ALTD-2);
@@ -956,6 +956,6 @@ void displayConfigScreen(void)
     MAX7456_WriteString_P(configMsg87, MAGT);
     MAX7456_WriteString(itoa(temperMAX,screenBuffer,10),MAGD-3);
     }
-    
+
   displayCursor();
 }
