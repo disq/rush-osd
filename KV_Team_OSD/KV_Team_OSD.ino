@@ -157,7 +157,7 @@ void loop()
     if (!Settings[S_VIDVOLTAGE_VBAT]) {
       vidvoltage = float(analogRead(vidvoltagePin)) * Settings[S_VIDDIVIDERRATIO] * (1.1/102.3/4);
     }
-    if (!Settings[S_MWRSSI]) {
+    if (!Settings[S_MWRSSI] && !Settings[S_PWMRSSI]) {
       rssiADC = (analogRead(rssiPin)*1.1*100)/1023;  // RSSI Readings, result in mV/10 (example 1.1V=1100mV=110 mV/10)
     }
     amperage = (AMPRERAGE_OFFSET - (analogRead(amperagePin)*AMPERAGE_CAL))/10.23;
@@ -396,25 +396,27 @@ void calculateTrip(void)
 void calculateRssi(void)
 {
   float aa=0;
+  int max_multiplier = 1;
 
- if (Settings[S_PWMRSSI]){
-     //Digital read Pin
-   aa = pulseIn(PwmRssiPin, HIGH);
-   aa = ((aa-Settings[S_RSSIMIN]) *101)/((Settings[S_RSSIMAX]*4)-Settings[S_RSSIMIN]) ;
+  if (Settings[S_PWMRSSI]){
+   aa = rssiADC; // read in loop()
+   max_multiplier = 4;
  }
   else {
       if (Settings[S_MWRSSI]) {
         aa =  MwRssi;
+        max_multiplier = 4;
       }
       else {
         aa=rssiADC;  // actual RSSI analogic signal received
       }
-  aa = ((aa-Settings[S_RSSIMIN]) *101)/(Settings[S_RSSIMAX]*4-Settings[S_RSSIMIN]) ;  // Percentage of signal strength
-  rssi_Int += ( ( (signed int)((aa*rssiSample) - rssi_Int )) / rssiSample );  // Smoothing the readings
-  rssi = rssi_Int / rssiSample ;
-  if(rssi<0) rssi=0;
-  if(rssi>100) rssi=100;
   }
+aa = ((aa-Settings[S_RSSIMIN]) *101)/(Settings[S_RSSIMAX]*max_multiplier-Settings[S_RSSIMIN]) ;  // Percentage of signal strength
+
+rssi_Int += ( ( (signed int)((aa*rssiSample) - rssi_Int )) / rssiSample );  // Smoothing the readings
+rssi = rssi_Int / rssiSample ;
+if(rssi<0) rssi=0;
+if(rssi>100) rssi=100;
 }
 
 void writeEEPROM(void)
