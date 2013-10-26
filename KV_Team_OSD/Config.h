@@ -5,7 +5,7 @@
 
 /********************       PWM RSSI      *********************/
 
-#define PwmRssiPin 12              // Miso Pin
+#define PwmRssiPin 3              // PAL jumper pin (D3)
 
 /**********************       Serial speed      ************************/
 
@@ -111,6 +111,3 @@
 #define MAGD 113+(30*6)
 
 #define SAVEP 93+(30*9)
-
-
-

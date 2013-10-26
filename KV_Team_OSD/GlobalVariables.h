@@ -10,7 +10,6 @@ const uint16_t amperagePin=1;
 const uint16_t rssiPin=3;
 const uint16_t temperaturePin=6;            // Temperature pin 6 for original Rushduino Board V1.2
 const uint8_t rssiSample=30;
-//const uint8_t lowrssiAlarm=RSSI_ALARM;     // This will make blink the Rssi if lower then this value
 
 //General use variables
 int tenthSec=0;
