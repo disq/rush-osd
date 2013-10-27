@@ -252,7 +252,7 @@ void loop()
       blankserialRequest(MSPcmdsend);
 
     MAX7456_DrawScreen();
-    if( allSec < 10 ){
+    if( allSec < introTime ){
       displayIntro();
       lastCallSign = onTime;
     }

@@ -12,6 +12,7 @@ const uint16_t temperaturePin=6;            // Temperature pin 6 for original Ru
 const uint8_t rssiSample=30;
 
 #define rssiPwmSamples 16 //consecutive reads with pulseIn
+#define introTime 10
 
 //General use variables
 int tenthSec=0;
