@@ -11,6 +11,8 @@ const uint16_t rssiPin=3;
 const uint16_t temperaturePin=6;            // Temperature pin 6 for original Rushduino Board V1.2
 const uint8_t rssiSample=30;
 
+#define rssiPwmSamples 16 //consecutive reads with pulseIn
+
 //General use variables
 int tenthSec=0;
 int halfSec=0;
@@ -223,9 +225,9 @@ float amperage = 0;                // its the real value x10
 float amperagesum = 0;
 
 // Rssi
-int rssi =0;
-int rssiADC=0;
-int rssi_Int=0;
+uint16_t rssi =0;
+uint16_t rssiADC=0;
+uint16_t rssi_Int=0;
 
 
 // For Voltage

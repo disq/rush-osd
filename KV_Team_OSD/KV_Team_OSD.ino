@@ -165,8 +165,10 @@ void loop()
   if (Settings[S_MWRSSI]) {
       rssiADC = MwRssi;
   }
-   if (Settings[S_PWMRSSI]){
-   rssiADC = pulseIn(PwmRssiPin, HIGH);
+  if (Settings[S_PWMRSSI]){
+    uint32_t tmpRssi = 0;
+    for(unsigned int i = 0; i < rssiPwmSamples; i++) tmpRssi += pulseIn(PwmRssiPin, HIGH, 100);
+    rssiADC = tmpRssi / rssiPwmSamples;
   }
 
   // Blink Basic Sanity Test Led at 1hz
@@ -400,7 +402,6 @@ void calculateRssi(void)
 
   if (Settings[S_PWMRSSI]){
    aa = rssiADC; // read in loop()
-   max_multiplier = 4;
  }
   else {
       if (Settings[S_MWRSSI]) {
@@ -415,6 +416,7 @@ aa = ((aa-Settings[S_RSSIMIN]) *101)/(Settings[S_RSSIMAX]*max_multiplier-Setting
 
 rssi_Int += ( ( (signed int)((aa*rssiSample) - rssi_Int )) / rssiSample );  // Smoothing the readings
 rssi = rssi_Int / rssiSample ;
+
 if(rssi<0) rssi=0;
 if(rssi>100) rssi=100;
 }
